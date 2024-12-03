@@ -44,7 +44,6 @@ namespace HullDelaunayVoronoi
 
         private void OnPostRender()
         {
-
             GL.PushMatrix();
 
             GL.LoadIdentity();
