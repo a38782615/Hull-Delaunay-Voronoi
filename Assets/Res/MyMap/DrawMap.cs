@@ -65,8 +65,16 @@ namespace ET
                 m_matPropBlock = new MaterialPropertyBlock();
             }
 
-            m_matPropBlock.SetTexture("_MainTex", mainTexture);
-            m_matPropBlock.SetTexture("_Texture2DCover", overlayTexture);
+            m_meshRenderer.GetPropertyBlock(m_matPropBlock);
+            if (mainTexture != null)
+            {
+                m_matPropBlock.SetTexture("_MainTex", mainTexture);
+            }
+
+            if (overlayTexture != null)
+            {
+                m_matPropBlock.SetTexture("_Texture2DCover", overlayTexture);
+            }
             m_meshRenderer.SetPropertyBlock(m_matPropBlock);
         }
 
