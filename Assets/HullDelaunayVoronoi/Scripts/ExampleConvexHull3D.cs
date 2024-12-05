@@ -1,10 +1,6 @@
 ﻿using UnityEngine;
-using System.Collections.Generic;
 
-using HullDelaunayVoronoi.Hull;
-using HullDelaunayVoronoi.Primitives;
-
-namespace HullDelaunayVoronoi
+namespace ET
 {
 
     public class ExampleConvexHull3D : MonoBehaviour

@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace HullDelaunayVoronoi.Primitives
+namespace ET
 {
 
 	public abstract class Vertex : IVertex

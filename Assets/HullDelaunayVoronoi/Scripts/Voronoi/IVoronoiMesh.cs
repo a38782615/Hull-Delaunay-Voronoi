@@ -1,10 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-
-using HullDelaunayVoronoi.Primitives;
-using HullDelaunayVoronoi.Delaunay;
-
-namespace HullDelaunayVoronoi.Voronoi
+﻿using System.Collections.Generic;
+namespace ET
 {
 	
 	public interface IVoronoiMesh<VERTEX>

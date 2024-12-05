@@ -2,9 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 
-using HullDelaunayVoronoi.Primitives;
-
-namespace HullDelaunayVoronoi.Hull
+namespace ET
 {
     public class SingularInputException : Exception
     {

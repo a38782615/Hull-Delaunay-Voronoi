@@ -1,10 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-using HullDelaunayVoronoi.Delaunay;
-using HullDelaunayVoronoi.Primitives;
-
-namespace HullDelaunayVoronoi
+namespace ET
 {
 
     public class ExampleDelaunay2D : MonoBehaviour

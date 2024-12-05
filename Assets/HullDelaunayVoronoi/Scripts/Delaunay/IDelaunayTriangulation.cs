@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-using HullDelaunayVoronoi.Hull;
-using HullDelaunayVoronoi.Primitives;
-
-namespace HullDelaunayVoronoi.Delaunay
+namespace ET
 {
 	
 	public interface IDelaunayTriangulation<VERTEX>

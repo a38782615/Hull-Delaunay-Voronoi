@@ -1,12 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 
-using HullDelaunayVoronoi.Voronoi;
-using HullDelaunayVoronoi.Delaunay;
-using HullDelaunayVoronoi.Hull;
-using HullDelaunayVoronoi.Primitives;
-
-namespace HullDelaunayVoronoi
+namespace ET
 {
 
     public class ExampleVoronoi3D : MonoBehaviour

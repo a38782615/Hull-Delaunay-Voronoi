@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
-using HullDelaunayVoronoi.Delaunay;
-using HullDelaunayVoronoi.Primitives;
-
-namespace HullDelaunayVoronoi.Voronoi
+namespace ET
 {
 
     public class VoronoiMesh2 : VoronoiMesh2<Vertex2>

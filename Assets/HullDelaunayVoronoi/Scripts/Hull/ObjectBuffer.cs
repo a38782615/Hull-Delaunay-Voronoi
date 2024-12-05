@@ -1,9 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using HullDelaunayVoronoi.Primitives;
-
-namespace HullDelaunayVoronoi.Hull
+namespace ET
 {
     /// <summary>
     /// Holds all the objects needed to create a convex hull.

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections;
-
-namespace HullDelaunayVoronoi.Primitives
+﻿namespace ET
 {
 	public interface IVertex
 	{

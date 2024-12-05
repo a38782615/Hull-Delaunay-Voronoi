@@ -1,7 +1,6 @@
 ﻿using System;
-using System.Collections;
 
-namespace HullDelaunayVoronoi.Primitives
+namespace ET
 {
 
     public class Vertex4 : Vertex

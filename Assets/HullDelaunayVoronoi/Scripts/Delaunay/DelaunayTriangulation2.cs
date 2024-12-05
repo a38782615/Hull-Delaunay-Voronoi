@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using HullDelaunayVoronoi.Hull;
-using HullDelaunayVoronoi.Primitives;
-
-namespace HullDelaunayVoronoi.Delaunay
+namespace ET
 {
 
     public class DelaunayTriangulation2 : DelaunayTriangulation2<Vertex2>

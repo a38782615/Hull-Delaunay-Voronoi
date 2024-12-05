@@ -1,9 +1,6 @@
-using System;
 using System.Collections.Generic;
 
-using HullDelaunayVoronoi.Primitives;
-
-namespace HullDelaunayVoronoi.Hull
+namespace ET
 {
 
 	public interface IConvexHull<VERTEX>

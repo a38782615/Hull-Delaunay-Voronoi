@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections;
-
-using HullDelaunayVoronoi.Primitives;
-
-namespace HullDelaunayVoronoi.Delaunay
+﻿namespace ET
 {
 	public class DelaunayCell<VERTEX>
         where VERTEX : class, IVertex, new()

@@ -1,10 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-using HullDelaunayVoronoi.Primitives;
-using HullDelaunayVoronoi.Delaunay;
-
-namespace HullDelaunayVoronoi.Voronoi
+namespace ET
 {
 
     public class VoronoiRegion<VERTEX>

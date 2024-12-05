@@ -1,7 +1,5 @@
 ﻿using System;
-using System.Collections.Generic;
-
-namespace HullDelaunayVoronoi.Primitives
+namespace ET
 {
 	public class Simplex<VERTEX>
         where VERTEX : IVertex, new() 
