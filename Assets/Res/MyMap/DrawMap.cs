@@ -4,8 +4,25 @@ using UnityEngine;
 
 namespace MyMap
 {
+    public struct MapNode
+    {
+        public int2 position;
+    }
+    
     public struct UVTile
     {
+        //1 2 4
+        //8 0 16
+        //32 64 128 
+        public static int[] maski = new int[] { 1 << 5, 1 << 6, 1 << 7, 1 << 3, 0, 1 << 4, 1, 1 << 1, 1 << 2 };
+        public static Dictionary<int, int> Masks = new Dictionary<int, int>(){
+            { 214, 1 }, { 248, 2 }, { 208, 3 }, { 107, 4 }, { 66, 5 }, { 104, 6 }, { 64, 7 },
+            { 31, 8 }, { 22, 9 }, { 24, 10 }, { 16, 11 }, { 11, 12 }, { 2, 13 }, { 8, 14 }, { 0, 15 },
+            { 255, 16 }, { 254, 17 }, { 251, 18 }, { 250, 19 }, { 127, 20 }, { 126, 21 }, { 123, 22 }, { 122, 23 },
+            { 223, 24 }, { 224, 25 }, { 219, 26 }, { 218, 27 }, { 95, 28 }, { 94, 29 }, { 91, 30 }, { 90, 31 },
+            { 120, 32 }, { 75, 33 }, { 32, 34 }, { 210, 35 }, { 88, 36 }, { 74, 37 }, { 26, 38 }, { 82, 39 },
+            { 216, 40 }, { 106, 41 }, { 27, 42 }, { 86, 43 }, { 80, 44 }, { 72, 45 }, { 18, 46 }, { 10, 47 }
+        };
         public static int TileCount = 7;
         public static int tileSize = 136;
         public static int atlasWidth = 1024;
@@ -27,7 +44,7 @@ namespace MyMap
         {
             x %= TileCount;
             y %= TileCount;
-            return x + y * TileCount + 1;
+            return x + y * TileCount;
         }
         public override int GetHashCode()
         {
@@ -164,23 +181,8 @@ namespace MyMap
         public int width = 10;
         public int height = 10;
 
-        public static int[] maski = new int[] { 0, 1 << 3, 0, 1 << 1, 1 << 4, 1 << 2, 0, 1, 0 };
-        public static Dictionary<int, int> Masks;
         void Draw()
         {
-            //0 1 0
-            //2 16 4
-            //0 8 0
-            maski = new int[] { 0, 1 << 3, 0, 1 << 1, 1 << 4, 1 << 2, 0, 1, 0 };
-            Masks = new Dictionary<int, int>(){
-                { 0, 1 }, { 29, 2 }, { 30, 3 }, { 28, 4 }, { 27, 5 },{ 18, 6 }, { 26, 7 }, 
-                { 24, 8 }, { 23, 9 }, { 21, 10 },{ 33, 11 }, { 32, 12 }, { 19, 13 }, { 66, 14 }, 
-                { 72, 15 },{ 16, 16 }, { 31, 17 }, { 80, 18 }, { 82, 19 }, { 86, 20 },{ 88, 21 }, 
-                { 90, 22 }, { 91, 23 }, { 94, 24 }, { 95, 25 }, { 104, 26 }, { 106, 27 }, { 107, 28 },
-                { 120, 29 }, { 122, 30 },{ 123, 31 }, { 126, 32 }, { 127, 33 }, { 208, 34 }, { 210, 35 },
-                { 214, 36 }, { 216, 37 }, { 218, 38 }, { 219, 39 }, { 222, 40 }, {223, 41 }, { 248, 42 }, 
-                { 250, 43 }, { 251, 44 }, { 254, 45 },{ 255, 45 }, { 15, 46 }
-            }; 
             
             m_uvMap.Clear();
             for (int j = 0; j < UVTile.TileCount; j++)
@@ -197,58 +199,80 @@ namespace MyMap
                 for (int i = 0; i < width; i++)
                 {
                     var hasNode = HasNode(i, j);
-                    var uvtile2 = new UVTile2(new int2(i, j));
-                    var mask = GetMaskFromMap(i, j, true);
-                    var id = Masks[mask];
-                    DrawOne(new Rect(i * UVTile.cellSize, j * UVTile.cellSize, UVTile.cellSize, UVTile.cellSize), 
-                        uvtile2.uvRect,
-                        m_uvMap[id].uvRect);
-                    // if (!hasNode)
-                    // {
-                    //     var mask2 = GetMaskFromMap(i, j, false);
-                    //     var id2 = SubMasks[mask];
-                    // }
+                    if (hasNode)
+                    {
+                        var uvtile2 = new UVTile2(new int2(i, j));
+                        var mask = GetMaskFromMap(i, j);
+                        var id = UVTile.Masks[mask];
+                        DrawOne(new Rect(i * UVTile.cellSize, j * UVTile.cellSize, UVTile.cellSize, UVTile.cellSize), 
+                            uvtile2.uvRect,
+                            m_uvMap[id].uvRect);
+                    }
                 }
             }
         }
 
+        private Dictionary<int2,bool> Map = new Dictionary<int2, bool>();
+
+        private void CreateMap()
+        {
+            Map.Clear();
+            Map = new Dictionary<int2, bool>(){
+                {new int2(3, 2), true},
+                {new int2(3, 3), true},
+                {new int2(4, 2), true},
+                {new int2(4, 3), true},
+                {new int2(4, 4), true},
+                {new int2(4, 5), true},
+                {new int2(5, 4), true},
+                {new int2(5, 5), true},
+                {new int2(5, 7), true},
+                {new int2(6, 2), true},
+                {new int2(6, 3), true},
+                {new int2(6, 5), true},
+                {new int2(6, 7), true},
+                {new int2(7, 2), true},
+                {new int2(7, 3), true},
+                {new int2(7, 5), true},
+                {new int2(7, 6), true},
+                {new int2(7, 7), true},
+            };
+        }
+        
         private bool HasNode(int x, int y)
         {
             var ret = false;
-            if((x > -1 && x < width) && (y > -1 && y < height))
-            {
-                ret = true;
-                if (x == width / 2 && y == height / 2)
-                {
-                    ret = false;
-                }
-            }
-
+            Map.TryGetValue(new int2(x, y), out ret);
             return ret;
         }
         
-        private int GetMaskFromMap(int x, int y,bool hasNode)
+        private int GetMaskFromMap(int x, int y)
         {
             var mask = 0;
             for (int j = -1; j < 2; j++)
             {
                 for (int i = -1; i < 2; i++)
                 {
+                    //坐标
                     var xx = x + i;
                     var yy = y + j;
                     
+                    //mask坐标
                     var xi = i + 1;
                     var yi = j + 1;
-                    var id = xi + yi * 3;
-                    var msk = maski[id];
-                    if (hasNode)
+                    var mskid = xi + yi * 3;
+                    int msk = 0;
+                    if (i == 0 || j == 0)
                     {
-                        msk = (HasNode(xx,yy) ? msk: 0);
+                        // 正方向
+                        msk = (HasNode(xx,yy) ? UVTile.maski[mskid]: 0);
                     }
                     else
                     {
-                        msk = (!HasNode(xx,yy) ? msk: 0);
+                        //角落如果有 需要判断 角落2边HasNode
+                        msk = ((HasNode(xx, yy) && HasNode(xx, y) && HasNode(x, yy)) ? UVTile.maski[mskid] : 0);
                     }
+                    
                     mask +=  msk;
                     if (msk > 0)
                     {
@@ -257,7 +281,6 @@ namespace MyMap
                 }
             }
             Debug.Log($"{x} : {y} : mask1:" + mask);
-
             return mask;
         }
 
@@ -272,6 +295,7 @@ namespace MyMap
 
         private void OnValidate()
         {
+            CreateMap();
             CreateMesh();
             Draw();
             Render();
