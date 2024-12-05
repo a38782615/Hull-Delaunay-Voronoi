@@ -15,9 +15,36 @@ namespace ET
         public Texture2D overlayTexture;
         private MaterialPropertyBlock m_matPropBlock;
         private MapLogic m_mapLogic;
+        [SerializeField] private int m_sortingLayer = 0;
+        [SerializeField] private int m_orderInLayer = 0;
+
+        public int OrderInLayer
+        {
+            get { return m_meshRenderer.sortingOrder; }
+            set { m_meshRenderer.sortingOrder = value; }
+        }
+
+        public int SortingLayerID
+        {
+            get { return m_meshRenderer.sortingLayerID; }
+            set { m_meshRenderer.sortingLayerID = value; }
+        }
+
+        public string SortingLayerName
+        {
+            get { return m_meshRenderer.sortingLayerName; }
+            set { m_meshRenderer.sortingLayerName = value; }
+        }
 
         private void CreateMesh()
         {
+            meshFilter = GetComponent<MeshFilter>();
+            m_meshRenderer = GetComponent<MeshRenderer>();
+            if (m_meshRenderer != null)
+            {
+                SortingLayerID = m_sortingLayer;
+                OrderInLayer = m_orderInLayer;
+            }
             if (m_mapLogic == null)
             {
                 m_mapLogic = new MapLogic();
@@ -25,16 +52,12 @@ namespace ET
             }
 
             m_mapLogic.Clear();
-
-            meshFilter = GetComponent<MeshFilter>();
             meshFilter.sharedMesh = new Mesh
             {
                 hideFlags = HideFlags.HideAndDontSave,
                 name = name + "_mesh"
             };
             meshFilter.sharedMesh.Clear();
-
-            m_meshRenderer = GetComponent<MeshRenderer>();
             if (m_matPropBlock == null)
             {
                 m_matPropBlock = new MaterialPropertyBlock();
@@ -91,19 +114,32 @@ namespace ET
         }
 
         public uint seed = 10;
-
+        public int Width = 10;
         private Dictionary<int2, bool> GenMap()
         {
-            Random random = Random.CreateFromIndex(seed);
             var map = new Dictionary<int2, bool>();
-            for (int i = 0; i < 10; i++)
+            if (seed == 0)
             {
-                for (int j = 0; j < 10; j++)
+                for (int i = 0; i < Width; i++)
                 {
-                    map[new int2(i, j)] = random.NextBool();
+                    for (int j = 0; j < Width; j++)
+                    {
+                        map[new int2(i, j)] = true;
+                    }
                 }
             }
+            else
+            {
+                Random random = Random.CreateFromIndex(seed);
+                for (int i = 0; i < Width; i++)
+                {
+                    for (int j = 0; j < Width; j++)
+                    {
+                        map[new int2(i, j)] = random.NextBool();
+                    }
+                }
 
+            }
             return map;
         }
 
