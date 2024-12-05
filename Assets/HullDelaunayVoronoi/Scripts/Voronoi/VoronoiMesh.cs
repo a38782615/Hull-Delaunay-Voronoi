@@ -6,46 +6,32 @@ namespace ET
     public abstract class VoronoiMesh<VERTEX> : IVoronoiMesh<VERTEX>
         where VERTEX : class, IVertex, new()
     {
-
         public int Dimension { get; private set; }
-
         public IList<DelaunayCell<VERTEX>> Cells { get; private set; }
-
         public IList<VoronoiRegion<VERTEX>> Regions { get; private set; }
-
         public VoronoiMesh(int dimension)
         {
-
             Dimension = dimension;
-
             Cells = new List<DelaunayCell<VERTEX>>();
-
             Regions = new List<VoronoiRegion<VERTEX>>();
-
         }
 
         public virtual void Clear()
         {
-
             Cells.Clear();
             Regions.Clear();
-
         }
 
         public abstract void Generate(IList<VERTEX> input, bool assignIds = true, bool checkInput = false);
 
         protected void Generate(IList<VERTEX> input, IDelaunayTriangulation<VERTEX> delaunay, bool assignIds, bool checkInput = false)
         {
-
             Clear();
-
             delaunay.Generate(input, assignIds, checkInput);
-
             for (int i = 0; i < delaunay.Vertices.Count; i++)
             {
                 delaunay.Vertices[i].Tag = i;
             }
-
             for (int i = 0; i < delaunay.Cells.Count; i++)
             {
                 delaunay.Cells[i].CircumCenter.Id = i;

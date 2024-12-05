@@ -123,54 +123,43 @@ namespace ET
             return ps;
         }
 
+        public float size = 10;
         public uint seed = 10;
-        public int Width = 10;
+        public int NumberOfVertices = 1000;
 
+        List<Vertex2> vertices = new List<Vertex2>();
+        private VoronoiMesh2 voronoi;
         private Dictionary<int2, MapNode> GenMap()
         {
+            List<Vertex2> vertices = new List<Vertex2>();
+            var r = Random.CreateFromIndex(seed);
+            for (int i = 0; i < NumberOfVertices; i++)
+            {
+                float x = size * r.NextFloat(-1.0f, 1.0f);
+                float y = size * r.NextFloat(-1.0f, 1.0f);
+                vertices.Add(new Vertex2(x, y));
+            }
+
+            voronoi = new VoronoiMesh2();
+            voronoi.Generate(vertices);
+            // var n = new MapNode()
+            // {
+            //     NodeType = mapNodeType,
+            //     Pos = new int2(i, j)
+            // };
+            // map[n.Pos] = n;
             var map = new Dictionary<int2, MapNode>();
-            if (seed == 0)
-            {
-                for (int i = 0; i < Width; i++)
-                {
-                    for (int j = 0; j < Width; j++)
-                    {
-                        var n = new MapNode()
-                        {
-                            NodeType = mapNodeType,
-                            Pos = new int2(i, j)
-                        };
-                        map[n.Pos] = n;
-                    }
-                }
-            }
-            else
-            {
-                Random random = Random.CreateFromIndex(seed);
-                for (int i = 0; i < Width; i++)
-                {
-                    for (int j = 0; j < Width; j++)
-                    {
-                        if (random.NextFloat(0,1f) > 0.2f)
-                        {
-                            var n = new MapNode()
-                            {
-                                NodeType = mapNodeType,
-                                Pos = new int2(i, j)
-                            };
-                            map[n.Pos] = n;
-                        }
-                    }
-                }
-
-            }
-
             return map;
         }
 
         public void UpdateNode(int x, int y)
         {
-            m_mapLogic.Map.TryGetValue(new int2(x, y), out var node);
+            var pos = new int2(x, y);
+            m_mapLogic.Map[pos] = new MapNode()
+            {
+                NodeType = this.mapNodeType,
+                Pos = pos
+            };
         }
 
         private void OnValidate()

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using Unity.Mathematics;
 
 namespace ET
 {
@@ -54,12 +55,12 @@ namespace ET
 
         public float Distance(IVertex v)
         {
-            return (float)Math.Sqrt(SqrDistance(v));
+            return (float)math.sqrt(SqrDistance(v));
         }
 
         public float SqrDistance(IVertex v)
         {
-            int dimension = Math.Min(Dimension, v.Dimension);
+            int dimension = math.min(Dimension, v.Dimension);
             float sum = 0.0f;
 
             for (int i = 0; i < dimension; i++)

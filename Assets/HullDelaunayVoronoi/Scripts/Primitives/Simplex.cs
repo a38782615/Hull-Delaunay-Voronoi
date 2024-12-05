@@ -1,4 +1,6 @@
 ﻿using System;
+using Unity.Mathematics;
+
 namespace ET
 {
 	public class Simplex<VERTEX>
@@ -121,7 +123,7 @@ namespace ET
 			float nx = -ntX[1];
 			float ny = ntX[0];
 
-            float norm = (float)Math.Sqrt(nx * nx + ny * ny);
+            float norm = (float)math.sqrt(nx * nx + ny * ny);
 			
 			float f = 1.0f / norm;
 			Normal[0] = f * nx;
@@ -141,7 +143,7 @@ namespace ET
 			float ny = ntX[2] * ntY[0] - ntX[0] * ntY[2];
 			float nz = ntX[0] * ntY[1] - ntX[1] * ntY[0];
 
-            float norm = (float)Math.Sqrt(nx * nx + ny * ny + nz * nz);
+            float norm = (float)math.sqrt(nx * nx + ny * ny + nz * nz);
 			
 			float f = 1.0f / norm;
 			Normal[0] = f * nx;
@@ -177,7 +179,7 @@ namespace ET
 					+ x[1] * (y[2] * z[0] - y[0] * z[2])
 					+ x[0] * (y[1] * z[2] - y[2] * z[1]);
 			
-			float norm = (float)Math.Sqrt(nx * nx + ny * ny + nz * nz + nw * nw);
+			float norm = (float)math.sqrt(nx * nx + ny * ny + nz * nz + nw * nw);
 			
 			float f = 1.0f / norm;
 			Normal[0] = f * nx;

@@ -1,4 +1,4 @@
-﻿using System;
+﻿using Unity.Mathematics;
 
 namespace ET
 {
@@ -53,7 +53,7 @@ namespace ET
 
         public float Distance(float px, float py, float pz, float pw)
         {
-            return (float)Math.Sqrt(SqrDistance(px, py, pz, pw));
+            return (float)math.sqrt(SqrDistance(px, py, pz, pw));
         }
 
         public float SqrDistance(float px, float py, float pz, float pw)

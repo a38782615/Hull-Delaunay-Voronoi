@@ -1,12 +1,11 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using CreativeSpore.SuperTilemapEditor;
 
 namespace ET
 {
-
     public class ExampleVoronoi2D : MonoBehaviour
     {
-
         public int NumberOfVertices = 1000;
 
         public float size = 10;
@@ -15,13 +14,8 @@ namespace ET
 
         private VoronoiMesh2 voronoi;
 
-        private Material lineMaterial;
-
-        private void Start()
+        private void Draw()
         {
-
-            lineMaterial = new Material(Shader.Find("Hidden/Internal-Colored"));
-
             List<Vertex2> vertices = new List<Vertex2>();
 
             Random.InitState(seed);
@@ -35,24 +29,20 @@ namespace ET
 
             voronoi = new VoronoiMesh2();
             voronoi.Generate(vertices);
-
         }
 
-        private void OnPostRender()
+        void OnDrawGizmos()
         {
-            GL.PushMatrix();
-
-            GL.LoadIdentity();
-            GL.MultMatrix(GetComponent<Camera>().worldToCameraMatrix);
-            GL.LoadProjectionMatrix(GetComponent<Camera>().projectionMatrix);
-
-            lineMaterial.SetPass(0);
-            GL.Begin(GL.LINES);
-
-            GL.Color(Color.red);
-
+            Draw();
+            int i = 0;
+            
             foreach (VoronoiRegion<Vertex2> region in voronoi.Regions)
             {
+                if (i > 1)
+                {
+                    break;
+                }
+                i++;
                 bool draw = true;
 
                 foreach (DelaunayCell<Vertex2> cell in region.Cells)
@@ -62,6 +52,8 @@ namespace ET
                         draw = false;
                         break;
                     }
+
+                    DrawPoint(cell.CircumCenter, Color.red);
                 }
 
                 if (!draw) continue;
@@ -70,42 +62,23 @@ namespace ET
                 {
                     Vertex2 v0 = edge.From.CircumCenter;
                     Vertex2 v1 = edge.To.CircumCenter;
-
                     DrawLine(v0, v1);
                 }
             }
-
-            GL.End();
-            GL.Begin(GL.QUADS);
-            GL.Color(Color.yellow);
-
-            foreach (DelaunayCell<Vertex2> cell in voronoi.Cells)
-            {
-                if (!InBound(cell.CircumCenter)) continue;
-
-                DrawPoint(cell.CircumCenter);
-            }
-
-            GL.End();
-            GL.PopMatrix();
+ 
         }
 
         private void DrawLine(Vertex2 v0, Vertex2 v1)
         {
-            GL.Vertex3(v0.X, v0.Y, 0.0f);
-            GL.Vertex3(v1.X, v1.Y, 0.0f);
+            Gizmos.DrawLine(new Vector3(v0.X, v0.Y, 0), new Vector3(v1.X, v1.Y, 0));
         }
 
-        private void DrawPoint(Vertex2 v)
+        private void DrawPoint(Vertex2 v, Color c )
         {
             float x = v.X;
             float y = v.Y;
-            float s = 0.05f;
-
-            GL.Vertex3(x + s, y + s, 0.0f);
-            GL.Vertex3(x + s, y - s, 0.0f);
-            GL.Vertex3(x - s, y - s, 0.0f);
-            GL.Vertex3(x - s, y + s, 0.0f);
+            float s = 0.01f;
+            GizmosEx.DrawDot(this.transform, new Vector3(x, y), s, c);
         }
 
         private bool InBound(Vertex2 v)
@@ -115,26 +88,5 @@ namespace ET
 
             return true;
         }
-
     }
-
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
