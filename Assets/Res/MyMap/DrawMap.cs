@@ -9,6 +9,7 @@ namespace ET
     [RequireComponent(typeof(MeshRenderer))]
     public class DrawMap : MonoBehaviour
     {
+        public MapNodeType mapNodeType;
         public MeshRenderer m_meshRenderer;
         public MeshFilter meshFilter;
         public Texture2D mainTexture;
@@ -45,6 +46,7 @@ namespace ET
                 SortingLayerID = m_sortingLayer;
                 OrderInLayer = m_orderInLayer;
             }
+
             if (m_mapLogic == null)
             {
                 m_mapLogic = new MapLogic();
@@ -115,16 +117,22 @@ namespace ET
 
         public uint seed = 10;
         public int Width = 10;
-        private Dictionary<int2, bool> GenMap()
+
+        private Dictionary<int2, MapNode> GenMap()
         {
-            var map = new Dictionary<int2, bool>();
+            var map = new Dictionary<int2, MapNode>();
             if (seed == 0)
             {
                 for (int i = 0; i < Width; i++)
                 {
                     for (int j = 0; j < Width; j++)
                     {
-                        map[new int2(i, j)] = true;
+                        var n = new MapNode()
+                        {
+                            NodeType = mapNodeType,
+                            Pos = new int2(i, j)
+                        };
+                        map[n.Pos] = n;
                     }
                 }
             }
@@ -135,12 +143,26 @@ namespace ET
                 {
                     for (int j = 0; j < Width; j++)
                     {
-                        map[new int2(i, j)] = random.NextBool();
+                        if (random.NextFloat(0,1f) > 0.2f)
+                        {
+                            var n = new MapNode()
+                            {
+                                NodeType = mapNodeType,
+                                Pos = new int2(i, j)
+                            };
+                            map[n.Pos] = n;
+                        }
                     }
                 }
 
             }
+
             return map;
+        }
+
+        public void UpdateNode(int x, int y)
+        {
+            m_mapLogic.Map.TryGetValue(new int2(x, y), out var node);
         }
 
         private void OnValidate()

@@ -153,6 +153,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596c228423144991861bc363eca63a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapNodeType: 2
   m_meshRenderer: {fileID: 146016620}
   meshFilter: {fileID: 146016621}
   mainTexture: {fileID: 2800000, guid: c1ebf2726eb637445942b3ab770df144, type: 3}
@@ -219,12 +220,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 146016618}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2094050113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1266046828
 GameObject:
@@ -319,13 +320,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1266046828}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.38187706, y: 0, z: 0, w: 0.9242132}
-  m_LocalPosition: {x: 0.67, y: 1.06, z: -1.71}
+  m_LocalRotation: {x: 0.37217793, y: 0, z: 0, w: 0.92816144}
+  m_LocalPosition: {x: 0.69, y: 0.694, z: -1.78}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: 44.9, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 43.7, y: 0, z: 0}
 --- !u!114 &1266046833
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -397,12 +398,12 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762881592}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
+  m_Father: {fileID: 2094050113}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1762881594
 MonoBehaviour:
@@ -416,6 +417,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596c228423144991861bc363eca63a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapNodeType: 1
   m_meshRenderer: {fileID: 1762881595}
   meshFilter: {fileID: 1762881596}
   mainTexture: {fileID: 2800000, guid: 29ae659785adff04ea1c2c2cd56a96b5, type: 3}
@@ -474,6 +476,40 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1762881592}
   m_Mesh: {fileID: 0}
+--- !u!1 &2094050112
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2094050113}
+  m_Layer: 0
+  m_Name: Root
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2094050113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2094050112}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children:
+  - {fileID: 2108344496}
+  - {fileID: 1762881593}
+  - {fileID: 146016622}
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
 --- !u!1 &2108344495
 GameObject:
   m_ObjectHideFlags: 0
@@ -501,13 +537,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2108344495}
   serializedVersion: 2
-  m_LocalRotation: {x: -0.7071068, y: -0, z: -0, w: 0.7071068}
-  m_LocalPosition: {x: -0.1, y: 0, z: 0.1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 0}
-  m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
+  m_Father: {fileID: 2094050113}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2108344497
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -520,6 +556,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 596c228423144991861bc363eca63a6f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mapNodeType: 3
   m_meshRenderer: {fileID: 2108344498}
   meshFilter: {fileID: 2108344499}
   mainTexture: {fileID: 2800000, guid: 43a4b1ad287e1f943ac9395b83312a66, type: 3}
@@ -583,6 +620,4 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1266046832}
-  - {fileID: 2108344496}
-  - {fileID: 1762881593}
-  - {fileID: 146016622}
+  - {fileID: 2094050113}

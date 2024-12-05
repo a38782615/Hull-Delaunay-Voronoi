@@ -87,9 +87,9 @@ namespace ET
             }
         }
 
-        private Dictionary<int2, bool> Map = new Dictionary<int2, bool>();
+        public Dictionary<int2, MapNode> Map = new Dictionary<int2, MapNode>();
 
-        public void CreateMap(Dictionary<int2, bool> map)
+        public void CreateMap(Dictionary<int2, MapNode> map)
         {
             Map.Clear();
             foreach (var item in map)
@@ -115,10 +115,8 @@ namespace ET
         }
 
         private bool HasNode(int x, int y)
-        {
-            var ret = false;
-            Map.TryGetValue(new int2(x, y), out ret);
-            return ret;
+        { 
+            return Map.TryGetValue(new int2(x, y), out var ret);
         }
 
         private int GetMaskFromMap(int x, int y)

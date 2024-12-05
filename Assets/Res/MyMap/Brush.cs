@@ -4,7 +4,7 @@ using Unity.Mathematics;
 
 namespace ET
 {
-    public enum CarpetType
+    public enum MapNodeType
     {
         None = 0,
         Grass = 1,
@@ -15,7 +15,7 @@ namespace ET
     public struct MapNode
     {
         public int2 Pos;
-        public CarpetType CarpetType;
+        public MapNodeType NodeType;
     }
 
     public struct UVTileCover
